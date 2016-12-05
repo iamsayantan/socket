@@ -11,7 +11,6 @@ io.on('connection', function (client) {
     console.log('An user connected');
     client.on('join', function(name) {
         people[client.id] = name;
-
         // client.emit() will only update the client that you are looking
         // at, whereas socket.sockets.emti() will update all connected clients
         client.emit('update', 'You have successfully connected..');
@@ -20,6 +19,7 @@ io.on('connection', function (client) {
     });
 
     client.on('send', function(msg){
+        console.log(people);
         io.sockets.emit('chat', people[client.id], msg);
     });
 
