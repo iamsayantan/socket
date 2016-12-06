@@ -19,7 +19,7 @@ io.on('connection', function (client) {
     });
 
     client.on('send', function(msg){
-        console.log(people);
+        console.log(people[client.id] + ' Says: ' + msg);
         io.sockets.emit('chat', people[client.id], msg);
     });
 

@@ -123,13 +123,14 @@
         });
 
         socket.on('chat', function(who, msg) {
+            console.log(who + '  ' + msg);
             if(ready) {
-                $('#msg').append('<li><strong>' + who + '</strong> says: ' + msg + '</li>');
+                $('#msgs').append('<li><strong>' + who + '</strong> says: ' + msg + '</li>');
             }
         });
 
         socket.on('disconnect', function() {
-            $('#msg').append('<li><strong>Disconnected</strong></li>');
+            $('#msgs').append('<li><strong>Disconnected</strong></li>');
             $('#msg').attr('disabled', 'disabled');
             $('#msg').attr('disabled', 'disabled');
         })
