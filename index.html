@@ -43,15 +43,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="span2">
-            <ul id="people" class="unstyled"></ul>
-        </div>
-        <div class="span4">
-            <ul id="msgs" class="unstyled"></ul>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row col-md-4">
         <div class="span5 offset2" id="login">
             <form class="form-inline">
                 <div class="form-group">
@@ -68,6 +60,14 @@
                 </div>
                 <input type="button" name="send" id="send" value="Send" class="btn btn-success">
             </form>
+        </div>
+    </div>
+    <div class="row col-md-8">
+        <div class="span2">
+            <ul id="people" class="unstyled"></ul>
+        </div>
+        <div class="span4">
+            <ul id="msgs" class="unstyled"></ul>
         </div>
     </div>
 </div>
@@ -111,7 +111,7 @@
 
         socket.on('update', function(msg) {
             if(ready) {
-                $('#msg').append('<li>' + msg + '</li>');
+                $('#msgs').append('<li>' + msg + '</li>');
             }
         });
 
@@ -152,7 +152,7 @@
         });
 
     });
-    
+
 
 
 </script>
