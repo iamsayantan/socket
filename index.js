@@ -32,7 +32,8 @@ io.on('connection', function (client) {
 });
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+    console.log(req);
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.set('port', process.env.PORT || 3000);
