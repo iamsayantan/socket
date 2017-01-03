@@ -1,3 +1,7 @@
+var app = require('express')();
+var http = require('http').Server(app);
+
+
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
  * and exposes the resulting object (containing the keys and values) on req.body
@@ -10,9 +14,6 @@ app.use(bodyParser.urlencoded({
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 app.use(bodyParser.json());
-
-var app = require('express')();
-var http = require('http').Server(app);
 
 // validation token for bot
 const VALIDATION_TOKEN = 'myBot_validation_token';
