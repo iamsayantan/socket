@@ -75,15 +75,13 @@ app.get('/webhook', function(req, res) {
  * webhook.
  */
 app.post('/webhook', function(req, res) {
-    console.log('URL hit');
-
     var data = req.body;
     console.log("The body is ", data);
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
         // Iterate over each entry, there might be multiple if batched
-        data.enty.forEach(function(entry) {
+        data.entry.forEach(function(entry) {
             var pageID = entry.id;
             var timeOfEvent = entry.time;
 
