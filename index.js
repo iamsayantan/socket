@@ -109,7 +109,6 @@ app.post('/webhook', function(req, res) {
  * Handle received message
  */
 function receivedMessage(event) {
-    console.log("This is event object: ", event);
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
@@ -124,8 +123,6 @@ function receivedMessage(event) {
 
     var messageText = message.text;
     var messageAttachments = message.attachments;
-    console.log('Message Id', messageID)
-    console.log('Message Text', messageText);
 
     if (messageText) {
 
@@ -182,7 +179,7 @@ function callSendAPI(messageData) {
             console.log('Successfully sent generic message');
         } else {
             console.error("Unable to send message.");
-            console.error(response);
+            // console.error(resposnse);
             console.error(error);
         }
 
