@@ -76,7 +76,6 @@ app.get('/webhook', function(req, res) {
  */
 app.post('/webhook', function(req, res) {
     var data = req.body;
-    console.log("The body is ", data);
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
@@ -108,6 +107,7 @@ app.post('/webhook', function(req, res) {
  * Handle received message
  */
 function receivedMessage(event) {
+    console.log("This is event object: ", event);
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timeStamp;
