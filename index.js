@@ -34,6 +34,7 @@ io.on('connection', function(client) {
 
 });
 
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
