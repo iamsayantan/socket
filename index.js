@@ -115,12 +115,15 @@ function receivedMessage(event) {
 
     console.log("Recieved message for user %d and page %d at %d with message: ",
         senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(message));
+
+    //console.log(JSON.stringify(message));
 
     var messageID = message.mid;
 
     var messageText = message.text;
     var messageAttachments = message.attachments;
+    console.log('Message Id', messageID)
+    console.log('Message Text', messageText);
 
     if (messageText) {
 
