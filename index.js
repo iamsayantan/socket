@@ -150,7 +150,7 @@ function sendGenericMessage(recipientId, messageText) {
  * Format the message data in appropiate format and call the Send API to 
  * send the message
  */
-function sendTextMessage(recipientID, messageID) {
+function sendTextMessage(recipientID, messageText) {
     var messageData = {
         recipient: {
             id: recipientID
