@@ -199,7 +199,7 @@ function receivedPostback(event) {
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
     var userDetails = getUserDetails(senderID);
-    console.log(userDetails);
+    console.log("User details :: " + userDetails);
     var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
     sendTextMessage(senderID, returnMessage);
 }
