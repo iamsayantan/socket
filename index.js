@@ -142,7 +142,6 @@ function sendMyInfo(recipientId) {
                     elements: [{
                         title: firstName + ' ' + lastName,
                         subtitle: "Web Devoloper at Codelogicx",
-                        item_url: "https://iamsayantan.github.io",
                         image_url: profilePicture,
                         buttons: [{
                             type: "web_url",
