@@ -204,7 +204,7 @@ function receivedPostback(event) {
         console.log(data);
         var firstName = data.first_name;
 
-        var returnMessage = "Hello " + firstName + ", it's nice to meet you!";
+        var returnMessage = "Hello " + data.first_name + ", it's nice to meet you!";
         sendTextMessage(senderID, returnMessage);
     });
 
