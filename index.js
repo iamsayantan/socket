@@ -190,7 +190,7 @@ function sendGenericMessage(recipientId) {
     callSendAPI(messageData);
 }
 
-/**
+/**Capacity6700mAh
  * Handle postback calls
  */
 function receivedPostback(event) {
@@ -198,9 +198,25 @@ function receivedPostback(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
-
+    var userDetails = getUserDetails(senderID);
+    console.log(userDetails);
     var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
     sendTextMessage(senderID, returnMessage);
+}
+
+
+/**
+ * Query the graph api to get details of the user so that I can personalize the message
+ */
+function getUserDetails(userID) {
+    request({
+        uri: 'https://graph.facebook.com/v2.6/' + userID,
+        qs: {
+            fields: 'first_name, last_name, gender',
+            access_token: PAGE_ACCESS_TOKEN
+        },
+        method: 'GET'
+    });
 }
 
 /**
