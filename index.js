@@ -35,6 +35,7 @@ app.use(bodyParser.json());
 // validation token for bot
 const VALIDATION_TOKEN = 'myBot_validation_token';
 const PAGE_ACCESS_TOKEN = 'EAAZAKO1ZBJHgYBAIdXkArrcVglfB9R3X27ZBk4hRo4m9MzwFhxFZCIsW17ptqprANFmbfEZCqxTWgrn1ArbQIKz5ZBthd1BKKA4IUYSUSZBNHN9dVTVZAqQNZCr7i363NMXwWgBi5dZCe1TSlVtPZCLWji0WdCKrJ9lgpF0NvtICnJZChQZDZD';
+const MY_ID = 1214205752005500;
 
 /*
  * Use your own validation token. Check that the token used in the Webhook 
@@ -108,8 +109,8 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
-            case 'generic':
-                sendGenericMessage(senderID);
+            case 'info':
+                sendMyInfo(senderID);
                 break;
 
             default:
@@ -120,8 +121,16 @@ function receivedMessage(event) {
     }
 }
 
-function sendGenericMessage(recipientId) {
-    var messageData = {
+function sendMyInfo(recipientId) {
+    
+    // request for user data and use the data
+    getUserDetails(MY_ID, function(data) {
+        data = JSON.parse(data);
+        var firstName = data.first_name;
+        var lastName = data.last_name;
+        var profilePicture = data.profile_pic;
+
+        var messageData = {
         recipient: {
             id: recipientId
         },
@@ -131,43 +140,31 @@ function sendGenericMessage(recipientId) {
                 payload: {
                     template_type: "generic",
                     elements: [{
-                        title: "rift",
-                        subtitle: "Next-generation virtual reality",
-                        item_url: "https://www.oculus.com/en-us/rift/",
-                        image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+                        title: firstName + ' ' + lastName,
+                        subtitle: "Web Devoloper at Codelogicx",
+                        item_url: "https://iamsayantan.github.io",
+                        image_url: profilePicture,
                         buttons: [{
                             type: "web_url",
-                            url: "https://www.oculus.com/en-us/rift/",
-                            title: "Open Web URL"
+                            url: "https://iamsayantan.github.io",
+                            title: "View my website"
                         }, {
                             type: "postback",
-                            title: "Call Postback",
+                            title: "Hello!!",
                             payload: "Payload for first bubble",
                         }],
-                    }, {
-                        title: "touch",
-                        subtitle: "Your Hands, Now in VR",
-                        item_url: "https://www.oculus.com/en-us/touch/",
-                        image_url: "http://messengerdemo.parseapp.com/img/touch.png",
-                        buttons: [{
-                            type: "web_url",
-                            url: "https://www.oculus.com/en-us/touch/",
-                            title: "Open Web URL"
-                        }, {
-                            type: "postback",
-                            title: "Call Postback",
-                            payload: "Payload for second bubble",
-                        }]
-                    }]
+                    },]
                 }
             }
         }
     };
 
     callSendAPI(messageData);
+    });
+
 }
 
-/**Capacity6700mAh
+/**
  * Handle postback calls
  */
 function receivedPostback(event) {
@@ -194,7 +191,7 @@ function getUserDetails(userID, callback) {
     request({
         uri: 'https://graph.facebook.com/v2.6/' + userID,
         qs: {
-            fields: 'first_name, last_name, gender',
+            fields: 'first_name, last_name, gender, profile_pic',
             access_token: PAGE_ACCESS_TOKEN
         },
         method: 'GET'
