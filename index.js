@@ -255,11 +255,7 @@ function sendTextMessage(recipientID, messageText) {
         },
         message: {
             text: messageText,
-            quick_replies: {
-                content_type: "text",
-                title: "Say Hello",
-                payload: "postback",
-            }
+            quick_replies: quickReplies
         }
     };
 
