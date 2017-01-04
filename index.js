@@ -240,13 +240,13 @@ function sendTextMessage(recipientID, messageText) {
             "content_type": "text",
             "title": "Red",
             "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
-            "image_url": "http://petersfantastichats.com/img/red.png"
+            "image_url": "http://www.goodmanrealtor.com/shared/search/version-10/images/measle_red-lrg-1-1.png"
         },
         {
             "content_type": "text",
             "title": "Green",
             "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
-            "image_url": "http://petersfantastichats.com/img/green.png"
+            "image_url": "http://www.hulabanban.com/Content/images/lnz-dian.png"
         }
     ];
     var messageData = {
