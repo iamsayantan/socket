@@ -91,7 +91,7 @@ app.post('/webhook', function(req, res) {
                 if (event.message) {
                     receivedMessage(event);
                 } else if (event.postback) {
-                    console.log(event.postback);
+                    console.log(event);
                     receivedPostback(event);
                 } else {
                     console.log("Webhook received unknown event: ", event);
