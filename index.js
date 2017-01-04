@@ -90,6 +90,8 @@ app.post('/webhook', function(req, res) {
             entry.messaging.forEach(function(event) {
                 if (event.message) {
                     receivedMessage(event);
+                } else if (event.postback) {
+                    receivedPostback(event);
                 } else {
                     console.log("Webhook received unknown event: ", event);
                 }
@@ -186,6 +188,19 @@ function sendGenericMessage(recipientId) {
     };
 
     callSendAPI(messageData);
+}
+
+/**
+ * Handle postback calls
+ */
+function receivedPostback(event) {
+    var senderID = event.sender.id;
+    var recipientID = event.recipient_id;
+    var timeOfMessage = event.timestamp;
+    var payload = event.postback.payload;
+
+    var returnMessage = "Postback called by " + senderID + "On " + timeOfMessage + "with payload " + payload;
+    sendTextMessage(recipientID, returnMessage);
 }
 
 /**
