@@ -91,6 +91,7 @@ app.post('/webhook', function(req, res) {
                 if (event.message) {
                     receivedMessage(event);
                 } else if (event.postback) {
+                    console.log("Event from webhook handler: %d", event);
                     receivedPostback(event);
                 } else {
                     console.log("Webhook received unknown event: ", event);
@@ -194,7 +195,6 @@ function sendGenericMessage(recipientId) {
  * Handle postback calls
  */
 function receivedPostback(event) {
-    console.log("Event from postback handler: %d", event);
     var senderID = event.sender.id;
     var recipientID = event.recipient_id;
     var timeOfMessage = event.timestamp;
