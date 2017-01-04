@@ -201,6 +201,7 @@ function receivedPostback(event) {
 
     // request for user data and use the data
     getUserDetails(senderID, function(data) {
+        console.log(data);
         var firstName = data.first_name;
 
         var returnMessage = "Hello " + firstName + ", it's nice to meet you!";
