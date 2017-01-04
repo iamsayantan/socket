@@ -198,8 +198,8 @@ function receivedPostback(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
-    getUserDetails(senderID);
-    // console.log("User details :: " + userDetails);
+    var userDetails = getUserDetails(senderID);
+    console.log("User details :: " + userDetails);
     var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
     sendTextMessage(senderID, returnMessage);
 }
@@ -218,7 +218,7 @@ function getUserDetails(userID) {
         method: 'GET'
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log("user details ", body);
+            return body;
         } else {
             console.error("Unable to send message.");
             console.error(response);
