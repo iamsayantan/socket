@@ -1,6 +1,21 @@
 var app = require('express')();
 var http = require('http').Server(app);
 
+/**
+ * setup the app and listen to a port for serving
+ */
+app.set('port', process.env.PORT || 3000);
+
+http.listen(app.get('port'), function() {
+    console.log('Listening on port 3000...');
+})
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const bodyParser = require('body-parser');
 const request = require('request');
 
@@ -20,41 +35,6 @@ app.use(bodyParser.json());
 // validation token for bot
 const VALIDATION_TOKEN = 'myBot_validation_token';
 const PAGE_ACCESS_TOKEN = 'EAAZAKO1ZBJHgYBAIdXkArrcVglfB9R3X27ZBk4hRo4m9MzwFhxFZCIsW17ptqprANFmbfEZCqxTWgrn1ArbQIKz5ZBthd1BKKA4IUYSUSZBNHN9dVTVZAqQNZCr7i363NMXwWgBi5dZCe1TSlVtPZCLWji0WdCKrJ9lgpF0NvtICnJZChQZDZD';
-
-var io = require('socket.io')(http);
-// var socket = io.listen(3000, '127.0.0.1');
-
-// all the people that have joined the chat
-var people = {};
-
-io.on('connection', function(client) {
-    console.log('An user connected');
-    client.on('join', function(name) {
-        people[client.id] = name;
-        // client.emit() will only update the client that you are looking
-        // at, whereas socket.sockets.emti() will update all connected clients
-        client.emit('update', 'You have successfully connected..');
-        io.sockets.emit('update', name + " has joined the conversation..");
-        io.sockets.emit('update-people', people);
-    });
-
-    client.on('send', function(msg) {
-        console.log(people[client.id] + ' Says: ' + msg);
-        io.sockets.emit('chat', people[client.id], msg);
-    });
-
-    client.on('disconnect', function() {
-        io.sockets.emit('update', people[client.id] + ' has left the conversation..');
-        delete people[client.id];
-        io.sockets.emit('update-people', people);
-    });
-
-});
-
-
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
 
 /*
  * Use your own validation token. Check that the token used in the Webhook 
@@ -283,9 +263,3 @@ function callSendAPI(messageData) {
 
     });
 }
-
-app.set('port', process.env.PORT || 3000);
-
-http.listen(app.get('port'), function() {
-    console.log('Listening on port 3000...');
-})
