@@ -199,9 +199,9 @@ function receivedPostback(event) {
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
 
-    console.log('SenderId %d', senderID);
-    console.log('recipientID %d', recipientID);
-    console.log('timeOfMessage %d', timeOfMessage);
+    // console.log('SenderId %d', senderID);
+    // console.log('recipientID %d', recipientID);
+    // console.log('timeOfMessage %d', timeOfMessage);
 
     var returnMessage = "Postback called ";
     sendTextMessage(recipientID, returnMessage);
@@ -212,6 +212,8 @@ function receivedPostback(event) {
  * send the message
  */
 function sendTextMessage(recipientID, messageText) {
+    console.log(recipientID);
+    console.log(messageText);
     var messageData = {
         recipient: {
             id: recipientID
