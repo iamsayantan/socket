@@ -201,10 +201,8 @@ function receivedPostback(event) {
 
     // request for user data and use the data
     getUserDetails(senderID, function(data) {
-        console.log(data);
         data = JSON.parse(data);
         var firstName = data.first_name;
-
         var returnMessage = "Hello " + data.first_name + ", it's nice to meet you!";
         sendTextMessage(senderID, returnMessage);
     });
@@ -241,12 +239,14 @@ function getUserDetails(userID, callback) {
  * send the message
  */
 function sendTextMessage(recipientID, messageText) {
+    var quickReplies = ['Hello!!', 'How are you?'];
     var messageData = {
         recipient: {
             id: recipientID
         },
         message: {
-            text: messageText
+            text: messageText,
+            quick_replies: quickReplies
         }
     };
 
