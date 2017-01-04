@@ -204,7 +204,7 @@ function receivedPostback(event) {
     // console.log('timeOfMessage %d', timeOfMessage);
 
     var returnMessage = "Postback called ";
-    sendTextMessage(recipientID, returnMessage);
+    sendTextMessage(senderID, returnMessage);
 }
 
 /**
