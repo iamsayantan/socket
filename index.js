@@ -198,17 +198,20 @@ function receivedPostback(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
-    var userDetails = getUserDetails(senderID);
-    console.log("User details :: " + userDetails);
-    var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
-    sendTextMessage(senderID, returnMessage);
+    var userDetails = getUserDetails(senderID, function(data) {
+
+        console.log("User details :: " + data);
+        var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
+        sendTextMessage(senderID, returnMessage);
+    });
+
 }
 
 
 /**
  * Query the graph api to get details of the user so that I can personalize the message
  */
-function getUserDetails(userID) {
+function getUserDetails(userID, callback) {
     request({
         uri: 'https://graph.facebook.com/v2.6/' + userID,
         qs: {
@@ -219,7 +222,7 @@ function getUserDetails(userID) {
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log("Successfully fetched user data");
-            return body;
+            callback(body);
         } else {
             console.error("Unable to fetch user data.");
             // console.error(response);
