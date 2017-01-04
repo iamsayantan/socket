@@ -262,6 +262,16 @@ function callSendAPI(messageData) {
         qs: { access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: messageData
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log("Successfully sent message");
+            console.log(body);
+        } else {
+            console.error("Unable to send message.");
+            // console.error(response);
+            // console.error(error);
+        }
+
     });
 }
 
