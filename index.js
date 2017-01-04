@@ -220,9 +220,9 @@ function getUserDetails(userID) {
         if (!error && response.statusCode == 200) {
             return body;
         } else {
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
+            console.error("Unable to fetch user data.");
+            // console.error(response);
+            // console.error(error);
         }
 
     });
