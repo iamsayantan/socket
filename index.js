@@ -196,7 +196,7 @@ function sendGenericMessage(recipientId) {
  */
 function receivedPostback(event) {
     var senderID = event.sender.id;
-    var recipientID = event.recipient_id;
+    var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
 
