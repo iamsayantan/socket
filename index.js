@@ -93,7 +93,7 @@ app.post('/webhook', function(req, res) {
                 } else if (event.postback) {
                     receivedPostback(event);
                 } else {
-                    console.log("Webhook received unknown event: ", event);
+                    // console.log("Webhook received unknown event: ", event);
                 }
             });
         });
@@ -218,6 +218,7 @@ function getUserDetails(userID) {
         method: 'GET'
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
+            console.log("Successfully fetched user data");
             return body;
         } else {
             console.error("Unable to fetch user data.");
