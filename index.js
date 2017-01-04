@@ -194,11 +194,14 @@ function sendGenericMessage(recipientId) {
  * Handle postback calls
  */
 function receivedPostback(event) {
-    console.log(event);
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
+
+    console.log('SenderId %d', senderID);
+    console.log('recipientID %d', recipientID);
+    console.log('timeOfMessage %d', timeOfMessage);
 
     var returnMessage = "Postback called by " + senderID + "On " + timeOfMessage + "with payload " + payload;
     sendTextMessage(recipientID, returnMessage);
