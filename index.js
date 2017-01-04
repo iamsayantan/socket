@@ -208,6 +208,7 @@ function receivedPostback(event) {
  * send the message
  */
 function sendTextMessage(recipientID, messageText) {
+    console.log("message text %d", messageText);
     var messageData = {
         recipient: {
             id: recipientID
@@ -237,7 +238,7 @@ function callSendAPI(messageData) {
             console.log('Successfully sent generic message');
         } else {
             console.error("Unable to send message.");
-            console.error(response);
+            // console.error(response);
             console.error(error);
         }
 
