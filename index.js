@@ -198,10 +198,12 @@ function receivedPostback(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var payload = event.postback.payload;
-    var userDetails = getUserDetails(senderID, function(data) {
 
-        console.log("User details :: " + data);
-        var returnMessage = "Postback called by user " + senderID + "at " + timeOfMessage + "with payload " + payload;
+    // request for user data and use the data
+    getUserDetails(senderID, function(data) {
+        var firstName = body.first_name;
+
+        var returnMessage = "Hello " + firstName + ", it's nice to meet you!";
         sendTextMessage(senderID, returnMessage);
     });
 
