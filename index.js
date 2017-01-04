@@ -216,6 +216,18 @@ function getUserDetails(userID) {
             access_token: PAGE_ACCESS_TOKEN
         },
         method: 'GET'
+    }, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var recipientID = body.recipient_id;
+            var messageId = body.message_id;
+
+            console.log('Successfully sent generic message');
+        } else {
+            console.error("Unable to send message.");
+            // console.error(response);
+            console.error(error);
+        }
+
     });
 }
 
