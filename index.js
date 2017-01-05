@@ -165,7 +165,7 @@ function receivedMessage(event) {
         // This will run all actions until our bot has nothing left to do
         wit.runActions(
                 sessionId, // the user's current session
-                text, // the user's message
+                messageText, // the user's message
                 sessions[sessionId].context // the user's current session state
             ).then((context) => {
                 // Our bot did everything it has to do.
