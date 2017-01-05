@@ -215,7 +215,7 @@ function receivedMessage(event) {
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
             case 'info':
-                getMyInfo();
+                getMyInfo(senderID);
                 sendMyInfo(senderID);
                 break;
 
@@ -316,7 +316,7 @@ function getUserDetails(userID, callback) {
 /**
  * get all my info and make cards with them
  */
-function getMyInfo() {
+function getMyInfo(recipientID) {
     const github_url = 'https://api.github.com/users/iamsayantan/repos';
     var repoData = [];
     request({
@@ -349,8 +349,15 @@ function getMyInfo() {
             }
             repoData.push(temp);
         }
-
-        console.log(repoData);
+        var messageData = {
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                attachment: repoData
+            }
+        };
+        callSendAPI(messageData);
     });
 }
 
