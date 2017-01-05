@@ -351,7 +351,7 @@ function getMyInfo(recipientID) {
         }
         var messageData = {
             recipient: {
-                id: recipientId
+                id: recipientID
             },
             message: {
                 attachment: repoData
