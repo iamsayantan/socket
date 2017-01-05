@@ -323,7 +323,7 @@ function getMyInfo() {
         uri: github_url,
         method: 'GET'
     }, function(error, response, body) {
-        console.log(error);
+        console.log(response);
         // body.forEach(function(repo) {
         //     var temp = {
         //         type: "template",
@@ -347,7 +347,7 @@ function getMyInfo() {
         //     }
         //     repoData.push(temp);
         // });
-        console.log(repoData);
+        // console.log(repoData);
     });
 }
 
