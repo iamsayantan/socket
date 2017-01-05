@@ -325,6 +325,7 @@ function getMyInfo() {
         headers: { 'user-agent': 'node.js' }
     }, function(error, response, body) {
         // console.log(body);
+        body = JSON.parse(body);
         body.forEach(function(repo) {
             var temp = {
                 type: "template",
