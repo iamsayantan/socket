@@ -328,35 +328,38 @@ function getMyInfo(recipientID) {
         for (repo in body) {
             // console.log(body[repo]);
             var temp = {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: [{
-                        title: body[repo].full_name,
-                        subtitle: body[repo].description,
-                        image_url: 'https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-9/15085548_1229299697132024_2694627972761628614_n.jpg?oh=7c13b94ebc363076aab5a30eefd13206&oe=5918EB2C',
-                        buttons: [{
-                            type: "web_url",
-                            url: body[repo].html_url,
-                            title: "Visit the repo"
-                        }, {
-                            type: "postback",
-                            title: "Hello!!",
-                            payload: "Payload for first bubble",
-                        }],
-                    }, ]
-                }
+                title: body[repo].full_name,
+                subtitle: body[repo].description,
+                image_url: 'https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-9/15085548_1229299697132024_2694627972761628614_n.jpg?oh=7c13b94ebc363076aab5a30eefd13206&oe=5918EB2C',
+                buttons: [{
+                    type: "web_url",
+                    url: body[repo].html_url,
+                    title: "Visit the repo"
+                }, {
+                    type: "postback",
+                    title: "Hello!!",
+                    payload: "Payload for first bubble",
+                }],
+
             }
             repoData.push(temp);
         }
-        console.log(repoData);
+
+
+        // console.log(repoData);
         console.log('===================================');
         var messageData = {
             recipient: {
                 id: recipientID
             },
             message: {
-                attachment: repoData
+                attachment: {
+                    type: 'template',
+                    payload: {
+                        template_type: 'generic',
+                        elements: repoData
+                    }
+                }
             }
         };
         console.log(messageData);
