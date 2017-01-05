@@ -241,7 +241,6 @@ function sendMyInfo(recipientId) {
                 id: recipientId
             },
             message: {
-                text: "You can also visit my website for more info.",
                 attachment: {
                     type: "template",
                     payload: {
@@ -354,7 +353,6 @@ function getMyInfo(recipientID) {
                 id: recipientID
             },
             message: {
-                text: "Here are all my GitHub repos",
                 attachment: {
                     type: 'template',
                     payload: {
