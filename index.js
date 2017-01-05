@@ -324,37 +324,32 @@ function getMyInfo() {
         method: 'GET',
         headers: { 'user-agent': 'node.js' }
     }, function(error, response, body) {
-        // console.log(body);
         body = JSON.parse(body);
-        // console.log('====================');
-        // console.log(body);
-        // console.log('=================');
         for (repo in body) {
-            console.log(body[repo]);
+            // console.log(body[repo]);
+            var temp = {
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: [{
+                        title: body[repo].full_name,
+                        subtitle: body[repo].description,
+                        image_url: body[repo].owner.avatar_url,
+                        buttons: [{
+                            type: "web_url",
+                            url: body[repo].html_url,
+                            title: "Visit the repo"
+                        }, {
+                            type: "postback",
+                            title: "Hello!!",
+                            payload: "Payload for first bubble",
+                        }],
+                    }, ]
+                }
+            }
+            repoData.push(temp);
         }
-        // body.forEach(function(repo) {
-        //     var temp = {
-        //         type: "template",
-        //         payload: {
-        //             template_type: "generic",
-        //             elements: [{
-        //                 title: repo.full_name,
-        //                 subtitle: repo.description,
-        //                 image_url: repo.owner.avatar_url,
-        //                 buttons: [{
-        //                     type: "web_url",
-        //                     url: repo.html_url,
-        //                     title: "Visit the repo"
-        //                 }, {
-        //                     type: "postback",
-        //                     title: "Hello!!",
-        //                     payload: "Payload for first bubble",
-        //                 }],
-        //             }, ]
-        //         }
-        //     }
-        //     repoData.push(temp);
-        // });
+
         console.log(repoData);
     });
 }
