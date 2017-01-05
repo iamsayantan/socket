@@ -40,6 +40,7 @@ const VALIDATION_TOKEN = 'myBot_validation_token';
 const PAGE_ACCESS_TOKEN = 'EAAZAKO1ZBJHgYBAIdXkArrcVglfB9R3X27ZBk4hRo4m9MzwFhxFZCIsW17ptqprANFmbfEZCqxTWgrn1ArbQIKz5ZBthd1BKKA4IUYSUSZBNHN9dVTVZAqQNZCr7i363NMXwWgBi5dZCe1TSlVtPZCLWji0WdCKrJ9lgpF0NvtICnJZChQZDZD';
 const MY_ID = 1214205752005500;
 const WIT_TOKEN = 'EYISYVULA6ZXTSC2VJ3IMBBQOENGE6JD';
+const WEATHER_TOKEN = '34caf28dbfade76665681a696481d210';
 
 //----------------------------------------------------
 // Wit.ai specific code
@@ -214,6 +215,7 @@ function receivedMessage(event) {
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
             case 'info':
+                getMyInfo();
                 sendMyInfo(senderID);
                 break;
 
@@ -308,6 +310,43 @@ function getUserDetails(userID, callback) {
             // console.error(error);
         }
 
+    });
+}
+
+/**
+ * get all my info and make cards with them
+ */
+function getMyInfo() {
+    const github_url = 'https://api.github.com/users/iamsayantan/repos';
+    var repoData = [];
+    request({
+        uri: github_url,
+        method: 'GET'
+    }, function(error, response, body) {
+        body.forEach(function(repo) {
+            var temp = {
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: [{
+                        title: repo.full_name,
+                        subtitle: repo.description,
+                        image_url: repo.owner.avatar_url,
+                        buttons: [{
+                            type: "web_url",
+                            url: repo.html_url,
+                            title: "Visit the repo"
+                        }, {
+                            type: "postback",
+                            title: "Hello!!",
+                            payload: "Payload for first bubble",
+                        }],
+                    }, ]
+                }
+            }
+            repoData.push(temp);
+        });
+        console.log(repoData);
     });
 }
 
