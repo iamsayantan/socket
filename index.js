@@ -324,8 +324,8 @@ function getMyInfo() {
         method: 'GET',
         headers: { 'user-agent': 'node.js' }
     }, function(error, response, body) {
-        console.log(body);
-        // body = JSON.parse(body);
+        // console.log(body);
+        body = JSON.parse(body);
         // console.log('====================');
         // console.log(body);
         // console.log('=================');
