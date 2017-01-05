@@ -264,6 +264,7 @@ function sendMyInfo(recipientId) {
             }
         };
 
+        sendTextMessage(recipientId, 'You can also visit my website.');
         callSendAPI(messageData);
     });
 
@@ -345,9 +346,6 @@ function getMyInfo(recipientID) {
             repoData.push(temp);
         }
 
-
-        // console.log(repoData);
-        console.log('===================================');
         var messageData = {
             recipient: {
                 id: recipientID
@@ -362,7 +360,7 @@ function getMyInfo(recipientID) {
                 }
             }
         };
-        console.log(messageData);
+        sendTextMessage(recipientID, 'Here are my GitHub repositories.');
         callSendAPI(messageData);
     });
 }
