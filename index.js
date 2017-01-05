@@ -241,6 +241,7 @@ function sendMyInfo(recipientId) {
                 id: recipientId
             },
             message: {
+                text: "You can also visit my website for more info.",
                 attachment: {
                     type: "template",
                     payload: {
@@ -252,7 +253,7 @@ function sendMyInfo(recipientId) {
                             buttons: [{
                                 type: "web_url",
                                 url: "https://iamsayantan.github.io",
-                                title: "View my website"
+                                title: "Visit my website"
                             }, {
                                 type: "postback",
                                 title: "Hello!!",
@@ -353,6 +354,7 @@ function getMyInfo(recipientID) {
                 id: recipientID
             },
             message: {
+                text: "Here are all my GitHub repos",
                 attachment: {
                     type: 'template',
                     payload: {
