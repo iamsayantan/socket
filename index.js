@@ -21,7 +21,6 @@ const request = require('request');
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
 
-console.log(Wit);
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -40,6 +39,54 @@ app.use(bodyParser.json());
 const VALIDATION_TOKEN = 'myBot_validation_token';
 const PAGE_ACCESS_TOKEN = 'EAAZAKO1ZBJHgYBAIdXkArrcVglfB9R3X27ZBk4hRo4m9MzwFhxFZCIsW17ptqprANFmbfEZCqxTWgrn1ArbQIKz5ZBthd1BKKA4IUYSUSZBNHN9dVTVZAqQNZCr7i363NMXwWgBi5dZCe1TSlVtPZCLWji0WdCKrJ9lgpF0NvtICnJZChQZDZD';
 const MY_ID = 1214205752005500;
+const WIT_TOKEN = 'EYISYVULA6ZXTSC2VJ3IMBBQOENGE6JD';
+
+//----------------------------------------------------
+// Wit.ai specific code
+// Each session has an entry:
+// SessionId -> {fbid: facebookUserId, context: sessionState}
+const sessions = {};
+
+const findOrCreateSession = (fbid) => {
+    let sessionId;
+    // check if we already have a session for the user fbid
+    Object.keys(sessions).forEach(k => {
+        if (sessions[k].fbid === fbid) {
+            // got it
+            sessionId = k;
+        }
+    });
+    if (!sessionId) {
+        // No session found for user fbid, create a new one
+        sessionId = new Date().toISOString();
+        sessions[sessionId] = { fbid: fbid, context: {} };
+    }
+    return sessionId;
+}
+
+// bot actions
+const actions = {
+    send({ sessionId }, { text }) {
+        // bot has something to say
+        // lets retrieve the facebook user who the session belongs to
+        const recipientId = sessions[sessionId].fbid;
+        sendTextMessage(recipientId, text);
+    },
+    greetUser({ context, entities }) {
+        context.greet = "Hello there. How are you?";
+        return context;
+    }
+};
+
+// Setting up the bot
+const wit = new Wit({
+    accessToken: WIT_TOKEN,
+    actions,
+    logger: new log.Logger(log.INFO)
+});
+
+
+//------------------------------------------------------
 
 /*
  * Use your own validation token. Check that the token used in the Webhook 
@@ -101,6 +148,10 @@ function receivedMessage(event) {
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
+    // We retrieve the user's current session, or create one if it doesn't exist
+    // This is needed for our bot to figure out the conversation history
+    const sessionId = findOrCreateSession(senderID);
+
     //console.log(JSON.stringify(message));
 
     var messageID = message.mid;
@@ -110,6 +161,31 @@ function receivedMessage(event) {
 
     if (messageText) {
 
+        // Let's forward the message to the Wit.ai Bot Engine
+        // This will run all actions until our bot has nothing left to do
+        wit.runActions(
+                sessionId, // the user's current session
+                text, // the user's message
+                sessions[sessionId].context // the user's current session state
+            ).then((context) => {
+                // Our bot did everything it has to do.
+                // Now it's waiting for further messages to proceed.
+                console.log('Waiting for next user messages');
+
+                // Based on the session state, you might want to reset the session.
+                // This depends heavily on the business logic of your bot.
+                // Example:
+                // if (context['done']) {
+                //   delete sessions[sessionId];
+                // }
+
+                // Updating the user's current session state
+                sessions[sessionId].context = context;
+            })
+            .catch((err) => {
+                console.error('Oops! Got an error from Wit: ', err.stack || err);
+            });
+
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
@@ -117,8 +193,8 @@ function receivedMessage(event) {
                 sendMyInfo(senderID);
                 break;
 
-            default:
-                sendTextMessage(senderID, messageText);
+                // default:
+                //     sendTextMessage(senderID, messageText);
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachments received");
