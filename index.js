@@ -330,7 +330,7 @@ function getMyInfo() {
         // console.log(body);
         // console.log('=================');
         for (repo in body) {
-            console.log(repo);
+            console.log(repo[full_name]);
         }
         // body.forEach(function(repo) {
         //     var temp = {
