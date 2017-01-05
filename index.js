@@ -18,6 +18,10 @@ app.get('/', function(req, res) {
 
 const bodyParser = require('body-parser');
 const request = require('request');
+const Wit = require('node-wit').Wit;
+const log = require('node-wit').log;
+
+console.log(Wit);
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -122,7 +126,7 @@ function receivedMessage(event) {
 }
 
 function sendMyInfo(recipientId) {
-    
+
     // request for user data and use the data
     getUserDetails(MY_ID, function(data) {
         data = JSON.parse(data);
@@ -131,34 +135,34 @@ function sendMyInfo(recipientId) {
         var profilePicture = data.profile_pic;
 
         var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: [{
-                        title: firstName + ' ' + lastName,
-                        subtitle: "Web Devoloper at Codelogicx",
-                        image_url: profilePicture,
-                        buttons: [{
-                            type: "web_url",
-                            url: "https://iamsayantan.github.io",
-                            title: "View my website"
-                        }, {
-                            type: "postback",
-                            title: "Hello!!",
-                            payload: "Payload for first bubble",
-                        }],
-                    },]
+            recipient: {
+                id: recipientId
+            },
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "generic",
+                        elements: [{
+                            title: firstName + ' ' + lastName,
+                            subtitle: "Web Devoloper at Codelogicx",
+                            image_url: profilePicture,
+                            buttons: [{
+                                type: "web_url",
+                                url: "https://iamsayantan.github.io",
+                                title: "View my website"
+                            }, {
+                                type: "postback",
+                                title: "Hello!!",
+                                payload: "Payload for first bubble",
+                            }],
+                        }, ]
+                    }
                 }
             }
-        }
-    };
+        };
 
-    callSendAPI(messageData);
+        callSendAPI(messageData);
     });
 
 }
