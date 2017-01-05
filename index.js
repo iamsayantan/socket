@@ -325,10 +325,13 @@ function getMyInfo() {
         headers: { 'user-agent': 'node.js' }
     }, function(error, response, body) {
         console.log(body);
-        body = JSON.parse(body);
-        console.log('====================');
-        console.log(body);
-        console.log('=================');
+        // body = JSON.parse(body);
+        // console.log('====================');
+        // console.log(body);
+        // console.log('=================');
+        for (repo in body) {
+            console.log(repo.full_name);
+        }
         // body.forEach(function(repo) {
         //     var temp = {
         //         type: "template",
