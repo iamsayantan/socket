@@ -321,7 +321,8 @@ function getMyInfo() {
     var repoData = [];
     request({
         uri: github_url,
-        method: 'GET'
+        method: 'GET',
+        headers: { 'user-agent': 'node.js' }
     }, function(error, response, body) {
         console.log(body);
         // body.forEach(function(repo) {
