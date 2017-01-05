@@ -326,7 +326,7 @@ function getMyInfo(recipientID) {
     }, function(error, response, body) {
         body = JSON.parse(body);
         for (repo in body) {
-            console.log(body[repo]);
+            // console.log(body[repo]);
             var temp = {
                 type: "template",
                 payload: {
@@ -349,6 +349,8 @@ function getMyInfo(recipientID) {
             }
             repoData.push(temp);
         }
+        console.log(repoData);
+        console.log('===================================');
         var messageData = {
             recipient: {
                 id: recipientID
@@ -357,6 +359,7 @@ function getMyInfo(recipientID) {
                 attachment: repoData
             }
         };
+        console.log(messageData);
         callSendAPI(messageData);
     });
 }
