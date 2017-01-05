@@ -72,6 +72,17 @@ const actions = {
         const recipientId = sessions[sessionId].fbid;
         sendTextMessage(recipientId, text);
     },
+    getForecast({ context, entities }) {
+        var location = firstEntityValue(entities, 'location');
+        if (location) {
+            context.forecast = 'sunny in ' + location; // we should call a weather API here
+            delete context.missingLocation;
+        } else {
+            context.missingLocation = true;
+            delete context.forecast;
+        }
+        return context;
+    },
     greetUser({ context, entities }) {
         context.greet = "Hello there. How are you?";
         return context;
