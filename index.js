@@ -215,8 +215,8 @@ function receivedMessage(event) {
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
             case 'info':
-                getMyInfo(senderID);
                 sendMyInfo(senderID);
+                getMyInfo(senderID);
                 break;
 
                 // default:
