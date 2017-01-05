@@ -326,7 +326,7 @@ function getMyInfo(recipientID) {
     }, function(error, response, body) {
         body = JSON.parse(body);
         for (repo in body) {
-            // console.log(body[repo]);
+            console.log(body[repo]['owner']['avatar_url']);
             var temp = {
                 title: body[repo].full_name,
                 subtitle: body[repo].description,
