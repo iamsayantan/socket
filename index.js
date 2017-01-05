@@ -334,7 +334,7 @@ function getMyInfo() {
                     elements: [{
                         title: body[repo].full_name,
                         subtitle: body[repo].description,
-                        image_url: body[repo].owner.avatar_url,
+                        image_url: 'https://scontent.fdel1-2.fna.fbcdn.net/v/t1.0-9/15085548_1229299697132024_2694627972761628614_n.jpg?oh=7c13b94ebc363076aab5a30eefd13206&oe=5918EB2C',
                         buttons: [{
                             type: "web_url",
                             url: body[repo].html_url,
