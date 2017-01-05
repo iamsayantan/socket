@@ -215,7 +215,10 @@ function receivedMessage(event) {
         // and send back the example. Otherwise, just echo the text we received
         switch (messageText) {
             case 'info':
+                sendTextMessage(recipientId, 'You can also visit my website.');
                 sendMyInfo(senderID);
+                
+                sendTextMessage(recipientID, 'Here are my GitHub repositories.');
                 getMyInfo(senderID);
                 break;
 
@@ -264,7 +267,6 @@ function sendMyInfo(recipientId) {
             }
         };
 
-        sendTextMessage(recipientId, 'You can also visit my website.');
         callSendAPI(messageData);
     });
 
@@ -360,7 +362,7 @@ function getMyInfo(recipientID) {
                 }
             }
         };
-        sendTextMessage(recipientID, 'Here are my GitHub repositories.');
+
         callSendAPI(messageData);
     });
 }
