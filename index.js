@@ -98,15 +98,14 @@ const actions = {
         return context;
     },
     greetUser({ context, entities }) {
-        console.log('Entities===>>', entities);
-        console.log('Context ===>> ', context);
         var greetings = [
             'Hello!', 'Hey', 'Hello there!', 'Hola',
             'Yo!!', 'Hey, nice to see you here', 'Hi! how are you?',
             'Hey, its good to meet you!'
         ];
-
         context.greet = greetings[Math.floor(Math.random()*greetings.length)];
+
+        // set context.done to true when we don't need to maintain the session state.
         context.done = true;
         return context;
     },
@@ -116,6 +115,7 @@ const actions = {
             'I am doing fine', 'I\'m doing good', 'My Server\'s up. So I\'m good.'
         ];
         context.status = responses[Math.floor(Math.random()*responses.length)];
+        context.done = true;
         return context;
     }
 };
@@ -211,7 +211,6 @@ function receivedMessage(event) {
                 sessions[sessionId].context // the user's current session state
             )
             .then((context) => {
-                console.log('This context is from runActions   :', context);
                 // Our bot did everything it has to do.
                 // Now it's waiting for further messages to proceed.
                 console.log('Waiting for next user messages');
@@ -220,7 +219,7 @@ function receivedMessage(event) {
                 // This depends heavily on the business logic of your bot.
                 // Example:
                 if (context['done']) {
-                  // delete sessions[sessionId];
+                  delete sessions[sessionId];
                     console.log('Context set to done..deleting sessions')
                 }
 
