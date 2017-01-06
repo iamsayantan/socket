@@ -109,6 +109,10 @@ const actions = {
         return context;
     },
     showStatus({context, entities}) {
+        if(context.greet) {
+            console.log('I have go a greet context');
+            greetUser({context, entities});
+        }
         console.log('Context ====>>>  ', context);
         console.log('Entities ====>>>', entities);
     }
