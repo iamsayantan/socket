@@ -222,6 +222,7 @@ function receivedMessage(event) {
 
                 // Updating the user's current session state
                 sessions[sessionId].context = context;
+                console.log(context);
             })
             .catch((err) => {
                 console.error('Oops! Got an error from Wit: ', err.stack || err);
