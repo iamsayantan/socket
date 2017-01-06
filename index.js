@@ -107,8 +107,21 @@ const actions = {
 
         context.greet = greetings[Math.floor(Math.random()*greetings.length)];;
         return context;
-    }
+    },
+    showStatus: showStatus(request)
 };
+
+
+/**
+ * When user is asking for bot status
+ * @param context
+ * @param entities
+ */
+function showStatus({context, entities}) {
+    console.log('Context ====>>>  ', context);
+    console.log('Entities ====>>>', entities);
+}
+
 
 // Setting up the bot
 const wit = new Wit({
