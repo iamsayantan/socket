@@ -112,7 +112,7 @@ const actions = {
     showStatus({context, entities}) {
         var responses = [
             'I AM AWESOME!! :)', 'All my functional and logical components are working as expected. Thanks to my boss ;)',
-            'I am doing fine', 'I\'m doing good', 'Server\'s up'
+            'I am doing fine', 'I\'m doing good', 'My Server\'s up. So I\'m good.'
         ];
         context.status = responses[Math.floor(Math.random()*responses.length)];
         return context;
