@@ -107,6 +107,7 @@ const actions = {
         ];
 
         context.greet = greetings[Math.floor(Math.random()*greetings.length)];
+        context.done = true;
         return context;
     },
     showStatus({context, entities}) {
@@ -218,9 +219,10 @@ function receivedMessage(event) {
                 // Based on the session state, you might want to reset the session.
                 // This depends heavily on the business logic of your bot.
                 // Example:
-                // if (context['done']) {
-                //   delete sessions[sessionId];
-                // }
+                if (context['done']) {
+                  // delete sessions[sessionId];
+                    console.log('Context set to done..deleting sessions')
+                }
 
                 // Updating the user's current session state
                 sessions[sessionId].context = context;
