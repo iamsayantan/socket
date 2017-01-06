@@ -99,6 +99,7 @@ const actions = {
     },
     greetUser({ context, entities }) {
         console.log('Entities===>>', entities);
+        console.log('Context ===>> ', context);
         var greetings = [
             'Hello!', 'Hey', 'Hello there!', 'Hola',
             'Yo!!', 'Hey, nice to see you here', 'Hi! how are you?',
