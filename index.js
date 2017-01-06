@@ -100,7 +100,8 @@ const actions = {
     greetUser({ context, entities }) {
         var greetings = [
             'Hello!', 'Hey', 'Hello there!', 'Hola',
-            'Yo!!',
+            'Yo!!', 'Hey, nice to see you here', 'Hi! how are you?',
+            'Hey, its good to meet you!'
         ];
 
         context.greet = greetings[Math.floor(Math.random()*greetings.length)];;
