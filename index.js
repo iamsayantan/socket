@@ -105,16 +105,16 @@ const actions = {
             'Hey, its good to meet you!'
         ];
 
-        context.greet = greetings[Math.floor(Math.random()*greetings.length)];;
+        context.greet = greetings[Math.floor(Math.random()*greetings.length)];
         return context;
     },
     showStatus({context, entities}) {
-        if(context.greet) {
-            console.log('I have go a greet context');
-            greetUser({context, entities});
-        }
-        console.log('Context ====>>>  ', context);
-        console.log('Entities ====>>>', entities);
+        var responses = [
+            'I AM AWESOME!! :)', 'All my functional and logical components are working as expected. Thanks to my boss ;)',
+            'I am doing fine', 'I\'m doing good', 'Server\'s up'
+        ];
+        context.status = responses[Math.floor(Math.random()*responses.length)];
+        return context;
     }
 };
 
