@@ -98,7 +98,12 @@ const actions = {
         return context;
     },
     greetUser({ context, entities }) {
-        context.greet = "Hello there. How are you?";
+        var greetings = [
+            'Hello!', 'Hey', 'Hello there!', 'Hola',
+            'Yo!!',
+        ];
+
+        context.greet = greetings[Math.floor(Math.random()*greetings.length)];;
         return context;
     }
 };
