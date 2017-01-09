@@ -121,7 +121,7 @@ const actions = {
     sentimentAnalyze({context, entities}) {
         console.log('Contex ==> ', context);
         console.log('Entities ==> ', entities);
-        console.log('sentiment value', entities.sentiment.value);
+        console.log('sentiment value', entities.sentiment[0].value);
     }
 };
 
