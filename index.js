@@ -115,6 +115,10 @@ const actions = {
         ];
         context.status = responses[Math.floor(Math.random()*responses.length)];
         return context;
+    },
+    sentimentAnalyze({context, entities}) {
+        console.log('Contex ==> ', context);
+        console.log('Entities ==> ', entities);
     }
 };
 
