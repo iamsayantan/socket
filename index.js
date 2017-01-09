@@ -121,7 +121,7 @@ const actions = {
     sentimentAnalyze({context, entities}) {
         // if this is a positive sentiment
         if(entities.sentiment[0].value == 'positive') {
-            var smilies = [':)', ':D', ':P', ';)', ':3'];
+            var smilies = [':)', ':D', ':P', ';)', '^_^', '☺'];
             context.sentiment = smilies[Math.floor(Math.random() * smilies.length)];
             return context;
         }
