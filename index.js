@@ -103,7 +103,7 @@ const actions = {
             'Yo!!', 'Hey, nice to see you here', 'Hi! how are you?',
             'Hey, its good to meet you!'
         ];
-        context.greet = greetings[Math.floor(Math.random()*greetings.length)];
+        context.greet = greetings[Math.floor(Math.random() * greetings.length)];
 
         // set context.done to true when we don't need to maintain the session state.
         context.done = true;
@@ -119,9 +119,12 @@ const actions = {
         return context;
     },
     sentimentAnalyze({context, entities}) {
-        console.log('Contex ==> ', context);
-        console.log('Entities ==> ', entities);
-        console.log('sentiment value', entities.sentiment[0].value);
+        // if this is a positive sentiment
+        if(entities.sentiment[0].value == 'positive') {
+            var smilies = [':)', ':D', ':P', ';)', ':3'];
+            context.sentiment = smilies[Math.floor(Math.random() * smilies.length)];
+            return context;
+        }
     }
 };
 
