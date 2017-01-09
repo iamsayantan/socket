@@ -98,22 +98,24 @@ const actions = {
         return context;
     },
     greetUser({ context, entities }) {
-        console.log('Entities===>>', entities);
         var greetings = [
             'Hello!', 'Hey', 'Hello there!', 'Hola',
             'Yo!!', 'Hey, nice to see you here', 'Hi! how are you?',
             'Hey, its good to meet you!'
         ];
-
         context.greet = greetings[Math.floor(Math.random()*greetings.length)];
+
+        // set context.done to true when we don't need to maintain the session state.
+        context.done = true;
         return context;
     },
     showStatus({context, entities}) {
         var responses = [
             'I AM AWESOME!! :)', 'All my functional and logical components are working as expected. Thanks to my boss ;)',
-            'I am doing fine', 'I\'m doing good', 'Server\'s up'
+            'I am doing fine', 'I\'m doing good', 'My Server\'s up. So I\'m good.'
         ];
         context.status = responses[Math.floor(Math.random()*responses.length)];
+        context.done = true;
         return context;
     },
     sentimentAnalyze({context, entities}) {
@@ -211,20 +213,22 @@ function receivedMessage(event) {
                 sessionId, // the user's current session
                 messageText, // the user's message
                 sessions[sessionId].context // the user's current session state
-            ).then((context) => {
+            )
+            .then((context) => {
                 // Our bot did everything it has to do.
                 // Now it's waiting for further messages to proceed.
                 console.log('Waiting for next user messages');
 
-                // Based on the session state, you might want to reset the session.
-                // This depends heavily on the business logic of your bot.
-                // Example:
-                // if (context['done']) {
-                //   delete sessions[sessionId];
-                // }
-
-                // Updating the user's current session state
-                sessions[sessionId].context = context;
+                // if the context is done, delete the context
+                // othewise update the session context with current context
+                if (context['done']) {
+                  delete sessions[sessionId];
+                    console.log('Context set to done..deleting sessions')
+                } else {
+                    // Updating the user's current session state
+                    sessions[sessionId].context = context;
+                    console.log(context);
+                }
             })
             .catch((err) => {
                 console.error('Oops! Got an error from Wit: ', err.stack || err);
