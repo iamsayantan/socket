@@ -98,18 +98,18 @@ const actions = {
         context.done = true;
         return context;
     },
-    showStatus({context, entities}) {
+    showStatus({ context, entities }) {
         var responses = [
             'I AM AWESOME!! :)', 'All my functional and logical components are working as expected. Thanks to my boss ;)',
             'I am doing fine', 'I\'m doing good', 'My Server\'s up. So I\'m good.'
         ];
-        context.status = responses[Math.floor(Math.random()*responses.length)];
+        context.status = responses[Math.floor(Math.random() * responses.length)];
         context.done = true;
         return context;
     },
-    sentimentAnalyze({context, entities}) {
+    sentimentAnalyze({ context, entities }) {
         // if this is a positive sentiment
-        if(entities.sentiment[0].value == 'positive') {
+        if (entities.sentiment[0].value == 'positive') {
             var smilies = [':)', ':D', ':P', ';)', '^_^', '☺'];
             context.sentiment = smilies[Math.floor(Math.random() * smilies.length)];
             return context;
@@ -215,7 +215,7 @@ function receivedMessage(event) {
                 // if the context is done, delete the context
                 // othewise update the session context with current context
                 if (context['done']) {
-                  delete sessions[sessionId];
+                    delete sessions[sessionId];
                     console.log('Context set to done..deleting sessions')
                 } else {
                     // Updating the user's current session state
@@ -429,7 +429,7 @@ function callSendAPI(messageData) {
             console.log(body);
         } else {
             console.error("Unable to send message.");
-            // console.error(response);
+            console.error(response);
             console.error(error);
         }
 
